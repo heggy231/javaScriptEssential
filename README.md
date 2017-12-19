@@ -1038,5 +1038,5 @@ debugger;
 console.log(buildTriangle(10));
 
 - Function expression vs function declaration
-![expreeVsDeclare](https://github.com/heggy231/javaScriptEssential/raw/master/src/common/img/funcDecVsFuncExp.png "Logo Title Text 1")
+![expreeVsDeclare](https://github.com/heggy231/javaScriptEssential/tree/master/img/funcDecVsFuncExp.png "expression Vs declaration")
 
