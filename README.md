@@ -17,7 +17,7 @@ one of the properties in the window object which html document sits
 you can call it directly also
 - document = window.document
 
-# DOM
+# D OM
 head vs body
 - head is invisible part of document (meta, title, link)
 - body has visible part
@@ -706,3 +706,334 @@ console.log(reverseString("Julia"));
 
   // function returns "Hello!" and console.log prints the return value
   console.log(sayHello());
+  ```
+
+quiz:
+```javascript
+function findAverage(x, y) { // x,y parameters defined during function declaration
+  var answer = (x + y) / 2;
+  return answer;
+}
+
+var avg = findAverage(5, 9); // 5,9 arguments passed in as function arguments
+```
+
+Are x and y parameters or arguments for this function?
+
+x and y are parameters! They are defined in the function declaration. The values 5, and 9 are passed in as function arguments.
+
+- summary of function lesson
+What you've learned so far:
+Functions package up code so you can easily use (and reuse) a block of code. Parameters are variables that are used to store the data that's passed into a function for the function to use. Arguments are the actual data that's passed into a function when it is invoked:
+
+// x and y are parameters in this function declaration
+function add(x, y) {
+  // function body
+  var sum = x + y;
+  return sum; // return statement
+}
+
+// 1 and 2 are passed into the function as arguments
+var sum = add(1, 2);
+The function body is enclosed inside curly brackets:
+
+function add(x, y) {
+  // function body!
+}
+Return statements explicitly make your function return a value:
+
+return sum;
+You invoke or call a function to have it do something:
+
+add(1, 2);
+Returns: 3
+
+# function lab
+```javascript
+function laugh() {
+  return ("hahahahahahahahahaha!");
+}
+
+console.log(laugh());
+```
+/*
+ * Programming Quiz: Laugh it Off 2 (5-2)
+ *
+ * Write a function called `laugh` with a parameter named `num` 
+ * that represents the number of "ha"s to return.
+ *
+ * Note:
+ *  - make sure your the final character is an exclamation mark ("!")
+ Here's an example of the output and how to call the function that you will write:
+
+console.log(laugh(3));
+ */
+
+ ```javascript
+
+ function laugh (num) {
+  var laughStr = "";
+  for(var i = 1; i <= num; i++) {
+    laughStr += "ha";
+  }
+  return laughStr + "!";
+ }
+
+ laugh (3);
+```
+
+ https://www.youtube.com/watch?time_continue=101&v=YY1QFCWGQzE
+Ex) difference btwn return and console.log
+  using prime number to demonstrate: Prime - the number can be only divisible of itself 
+    and 1. Function isPrime() tells integer greater than 2 is prime.
+ ```javascript
+
+function isPrime(integer) {
+  for (var x = 2; x < integer; x++) {
+    if(integer % x === 0) {
+      console.log(integer + " is divisible by " + x);
+      return false;
+    }
+  }
+  return true;
+}
+```
+Prime number function
+
+resource: about Scope
+https://www.youtube.com/watch?time_continue=119&v=HJegRwwjYrY
+
+
+- Quiz: Scope testing:
+
+Where can you print out the value of variable c without resulting in an error?
+
+```javascript
+var a = 1;
+function x() {
+  var b = 2;
+  function y() {
+    var c = 3;
+    function z() {
+      var d = 4;
+    }
+    z();
+  }
+  y();
+}
+
+x();
+```
+
+The variable c is defined inside function y(), so it's accessible only inside function y(). This means it can be printed anywhere inside function y(), as well as inside any functions declared inside function y().
+
+The inner functions y() and z() have access to their own local variables, the variables defined inside the functions they were also defined in (x() and y() functions respectively), and any global variables.
+
+- Shadowing 
+variable gets overwritten 
+
+```javascript
+var bookTitle = "Le Petit Prince";
+console.log(bookTitle);
+
+function displayBookEnglish() {
+  // declare variable again prevent from overwritten
+  var bookTitle = "The Little Prince"; 
+  console.log(bookTitle);
+}
+
+displayBookEnglish();
+console.log(bookTitle)
+
+// Another example of shadowing
+var x = 1;
+
+function addTwo() {
+  x = x + 2; 
+}
+
+addTwo(); // shadowing happens, global x is get increased by 2
+x = x + 1; // 3 + 1 = 4
+console.log(x); // 4 gets printed out
+
+// example with no shadowing
+var x = 1;
+
+function addTwo() {
+  var x = x + 2;
+}
+
+addTwo();
+x = x + 1;
+console.log(x);
+
+```
+- RECAP scope
+If an identifier is declared in global scope, it's available everywhere.
+If an identifier is declared in function scope, it's available in the function it was declared in (even in functions declared inside the function).
+When trying to access an identifier, the JavaScript Engine will first look in the current function. If it doesn't find anything, it will continue to the next outer function to see if it can find the identifier there. It will keep doing this until it reaches the global scope.
+Global identifiers are a bad idea. They can lead to bad variable names, conflicting variable names, and messy code.
+
+Quiz on Hosting
+
+What value will be printed to the console?
+
+sayHi("Julia");
+
+function sayHi(name) {
+  console.log(greeting + " " + name);
+  var greeting;
+}
+
+- output: undefined Julia
+
+The function declaration is hoisted to the top of its current scope, and inside the function, the greeting variable declaration is also hoisted to the top of its function scope.
+ 
+- Hositing: move to the top, raise by means of ropes and pulleys
+  Things that gets hoisted: 
+    1) function declaration are hoisted to the top of their current scope
+    ex) 
+```javascript
+findAverage(5, 9);
+
+function findAverage(x, y) {
+  var answer = (x + y) / 2;
+  return answer;
+}
+```
+// when function is executed function declaration is hoisted upto top
+- resource video: https://www.youtube.com/watch?time_continue=52&v=8z-HSS34dsM
+
+```javascript
+function sayGreeting() {
+  console.log(greeting);
+}
+
+sayGreeting(); // output: Reference error since greeting is declare anywhere
+
+// option2
+function sayGreeting() {
+  console.log(greeting);
+  var greeting; // now declare but no assignment
+}
+
+sayGreeting(); // output: undefined since it has not assigned a value
+
+function sayGreeting() {
+  console.log(greeting);
+  var greeting = "hello";
+}
+sayGreeting(); // output: undefined since var gets declared only value doesn't get assigned "hello" same as below.
+
+function sayGreeting() {
+  var greeting; // variable declaration is hoisted to the top
+  console.log(greeting); // no assignment is made to greeting var > undefined
+  greeting = "hello";
+}
+sayGreeting();
+```
+- Quiz on Hoisting:
+What will print to console?
+
+```javascript
+sayHi('Julia');
+
+function sayHi(name) {
+  console.log(greeting + " " + name);
+  var greeting; // greeting gets hoisted but undefined since no val is assigned.
+}
+
+// output: undefined Julia
+```
+- Qz 2) What value will be printed to the console?
+```javascript
+sayHi("Julia");
+
+function sayHi(name) {
+  console.log(greeting + " " + name);
+  var greeting = "Hello";
+}
+
+// output: undefined Julia
+```
+
+* Take away: The variable declaration is hoisted to the top of current scope (the top of the function). Remember that the declaration is hoisted, not the assignment. The code inside sayHi is equivalent to:
+```javascript
+var greeting;
+console.log(greeting + " " + name);
+greeting = "Hello";
+```
+
+Qz 3)
+What value will be printed to the console?
+```javascript
+function sayHi(name) {
+  var greeting = "Hello";
+  console.log(greeting + " " + name);
+}
+
+sayHi("Julia"); // Hello Julia
+```
+* Take away: The variable declaration and assignment are both already at the top of the function scope, so the function will print out: "Hello Julia"
+
+- Summary about hoisting:
+  * JavaScript hoists function declarations and variable declarations to the top of the current scope.
+  * Variable assignments are not hoisted.
+  * Declare functions and variables at the top of your scripts, so the syntax and behavior are consistent with each other.
+
+- Lab quiz on function
+/*
+ * Programming Quiz: Build A Triangle (5-3)
+
+ For this quiz, you're going to create a function called buildTriangle() that will accept an input (the triangle at its widest width) and will return the string representation of a triangle. See the example output below.
+
+buildTriangle(10);
+Returns:
+
+* 
+* * 
+* * * 
+* * * * 
+* * * * * 
+* * * * * * 
+* * * * * * * 
+* * * * * * * * 
+* * * * * * * * * 
+* * * * * * * * * *
+We've given you one function makeLine() to start with. The function takes in a line length, and builds a line of asterisks and returns the line with a newline character.
+
+function makeLine(length) {
+  var line = "";
+  for (var j = 1; j <= length; j++) {
+    line += "* "
+  }
+  return line + "\n";
+}
+You will need to call this makeLine() function in buildTriangle().
+
+This will be the most complicated program you've written yet, so take some time thinking through the problem before diving into the code. What tools will you need from your JavaScript tool belt? Professionals plan out their code before writing anything. Think through the steps your code will need to take and write them down in order. Then go through your list and convert each step into actual code. Good luck!
+ */
+
+// creates a line of * for a given length
+function makeLine(length) {
+    var line = "";
+    for (var j = 1; j <= length; j++) {
+        line += "* ";
+    }
+    return line + "\n";
+}
+
+// your code goes here.  Make sure you call makeLine() in your own code.
+function buildTriangle (widthTriangleBase) {
+    var triangle = "";
+    for (var i = 1; i <= widthTriangleBase; i++) {
+        triangle += makeLine(i); 
+    }
+    return triangle;
+}
+
+// test your code by uncommenting the following line
+debugger;
+console.log(buildTriangle(10));
+
+- Function expression vs function declaration
