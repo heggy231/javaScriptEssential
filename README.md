@@ -1037,3 +1037,5 @@ debugger;
 console.log(buildTriangle(10));
 
 - Function expression vs function declaration
+![alt function expression vs function declaration][expDec]
+[expDec]:img/funcDecVsFuncExp.png "alt function expression vs function declaration"
