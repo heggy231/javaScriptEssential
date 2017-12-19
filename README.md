@@ -1038,5 +1038,5 @@ debugger;
 console.log(buildTriangle(10));
 
 - Function expression vs function declaration
-[![expreeVsDeclare](img/funcDecVsFuncExp.png "expression Vs declaration")]
+![expreeVsDeclare](img/funcDecVsFuncExp.png "expression Vs declaration")
 
