@@ -1000,6 +1000,7 @@ Returns:
 * * * * * * * * 
 * * * * * * * * * 
 * * * * * * * * * *
+
 We've given you one function makeLine() to start with. The function takes in a line length, and builds a line of asterisks and returns the line with a newline character.
 
 function makeLine(length) {
@@ -1037,5 +1038,5 @@ debugger;
 console.log(buildTriangle(10));
 
 - Function expression vs function declaration
-![alt function expression vs function declaration][expDec]
-[expDec]:img/funcDecVsFuncExp.png "alt function expression vs function declaration"
+![expreeVsDeclare](https://github.com/heggy231/javaScriptEssential/raw/master/src/common/img/funcDecVsFuncExp.png "Logo Title Text 1")
+
