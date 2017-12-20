@@ -1031,3 +1031,168 @@ console.log(buildTriangle(10));
 - Function expression vs function declaration
 ![expreeVsDeclare](img/funcDecVsFuncExp.png "expression Vs declaration")
 
+- function expression has no longer a name
+```javascript
+// function expression
+var catSays = function(max) {
+  var catMessage = "";
+  for (var i = 0; i < max; i++) {
+    catMessage += "meow ";
+  }
+  return catMessage;
+};
+
+catSays; // returns the function
+
+// output of catSays
+function(max) {
+  var catMessage = ""
+  for (var i = 0; i < max; i++) {
+    catMessage += "meow ";
+  }
+  return catMessage;
+}
+```
+
+* Function Expression usu has anonymous function, a Function with no name
+However, Function expressions is not hoisted, since they involve variable assignment, and only variable declarations are hoisted.  The function expression will not be loaded until the interpreter reaches it in the script.
+
+```javascript
+function cat() {
+  console.log(meow(2));
+  var meow = function(max) {
+    var catMessage = "";
+    for(var i = 0; i < max; i++) {
+      catMesage += "meow ";
+    }
+    return catMessage;
+  }
+  function purr() {
+    return "purrr!";
+  }
+}
+
+cat();
+```
+when cat() is called it moves (hoists) the function declaration top of the function cat().
+```javascript
+function cat() {
+  // Function delcartion get hoisted top.
+  function purr() {
+    return "purrr!";
+  }
+  console.log(meow(2)); // Uncaught TypeError: meow is not a function()
+  var meow = function(max) {
+    var catMessage = "";
+    for(var i = 0; i < max; i++) {
+      catMesage += "meow ";
+    }
+    return catMessage;
+  }
+
+}
+
+cat();
+```
+
+- Another example of hoisted:
+```javascript
+function cat() {
+  console.log(purr()); // purr!
+  var meow = function(max) {
+    var catMessage = "";
+    for(var i = 0; i < max; i++) {
+      catMesage += "meow ";
+    }
+    return catMessage;
+  }
+  function purr() { // when purr() is called it gets hoisted on top
+    return "purrr!";
+  }
+}
+
+cat();
+```
+- resource: https://www.youtube.com/watch?time_continue=49&v=tjLDNvyhDM8
+Note: This animation is showing the difference between how hoisting impacts declared functions vs. function expressions. Notice how in the the animation the function expression is not hoisted, but the declared function is hoisted.
+
+- function as parameter: A function that is passed into another function = Callback
+
+```javascript
+// function expression catSays
+var catSays = function (max) {
+  var catMessage = "";
+  for(var i = 0; i < max; i++) {
+    catMessage += "meow ";
+  }
+  return catMessage;
+}
+
+// function declaration helloCat accepting a callback
+function helloCat(callbackFunc) {
+  return "Hello " + callbackFunc(3);
+}
+
+// pass in catSys as a callback function
+helloCat(catSays);
+```
+
+- Named function Expressions
+```javascript
+var favoriteMovie = function movie() { // named funtion movie
+  return "The Fountain";
+}
+
+favoriteMovie(); // still returns "The Fountain" 
+movie()// throw an error Do not call function name 
+```
+- resource on inline function
+https://www.youtube.com/watch?time_continue=23&v=wAXZLwK8TU0
+
+```javascript
+/*
+https://classroom.udacity.com/courses/ud803/lessons/a7c5b540-51a6-44dc-b2f2-515c9dd6ca4f/concepts/2e042a55-4a17-4b26-ba49-d53b014b3f23
+Inline function expressions
+    A function expression is when a function is assigned to a variable.
+    This also occurs when passing a function inline as an argument to another
+    function.  Take the favoriteMovie ex:
+*/
+
+// Function expression that assigns the function displayFavorite
+//  to the variable favoriteMovie
+var favoriteMovie = function displayFavorite(movieName) {
+    console.log("My favorite movie is " + movieName);
+};
+
+// Function declaration that has two parameters: a function for displaying
+//  a message, along with a name of a movie
+function movies(messageFunction, name) {
+    messageFunction(name);
+}
+
+// Call the movies function, pass in the favoriteMovie function and name of movie
+movies(favoriteMovie, "Obvious Child");
+
+// output: "My favorite movie is Obvious Child"
+
+/*
+However, you could have bypassed the first assignment of the function, by passing
+ the function to the movies() function inline.
+*/
+// Function declaration that takes in two arguments: a function displaying 
+//  a message, along with a name of a movie
+function movies(messageFunction, name) {
+    messageFunction(name);
+}
+
+// Call the movies function, pass in the function and name of movie
+movies(function displayFavorite(movieName) {
+    console.log("My favorite movie is " + movieName);
+}, "Obvious Child");
+
+// output: My favorite movie is Finding Nemo
+
+```
+- Why use anonymous inline function expressions (callback function)? Seems that inline function seems
+  useless sine only be used once and you can't call it by name.  Anonymous inline function 
+  expressions are used with function callbacks and saves writing many lines of code
