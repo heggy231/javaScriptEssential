@@ -1194,5 +1194,468 @@ movies(function displayFavorite(movieName) {
 
 ```
 - Why use anonymous inline function expressions (callback function)? Seems that inline function seems
-  useless sine only be used once and you can't call it by name.  Anonymous inline function 
+  useless since only be used once and you can't call it by name.  Anonymous inline function 
   expressions are used with function callbacks and saves writing many lines of code
+
+## Summary of Function Expression: When use the variable name to call a function defined in a function expression. Function Expression is function assigned to a varaible.  This function can be named or anonymous.
+
+```javascript
+// Anonymous function expression
+var doSomething = function(y) {
+  return y + 1;
+};
+
+// named function expression
+var doSomething = function addOne(y) { // do'nt call this function addOne() Throws reference error
+  return y + 1;
+};
+
+// for either of the definitions above, call function like this:
+doSomething(5);
+
+```
+- You can pass function as inline.  This streamlines your code (less code to write).
+```javascript
+// function declaration that takes in 2 arguments: a function for displaying
+//  a message, along with a name of a movie.
+
+function movies(messageFunction, name) {
+  messageFunction(name);
+}
+
+// call the movies function, pass in the function and name of movie
+movies(function displayFavorite(movieName) {
+  console.log("My favorite movie is  " + movieName);
+}, "Finding Nemo");
+```
+
+# Quiz: Laugh (5-4): WRite anonymous function expression that stores a function in a variable called "laugh" and outputs the number of "ha"s that you pass in as an argument.
+```javascript
+// anonymous function expression is function set to variable
+var laugh = function(numOfHa) {
+  var strOfHa = "";
+  for (var i = 0; i < numOfHa; i++) {
+    strOfHa += "ha";
+  }
+  return strOfHa + "!";
+};
+
+console.log(laugh(10));
+```
+# Quiz: Cry (5-5): Write a named function expression that stores the function in a variable called cry and returns "boohoo!".  Don't forget to call the function using the variable name, not the function name:
+
+```javascript
+var cry = function makeMeCry () {
+  return "boohoo!";
+};
+
+cry();
+/*
+What Went Well
+- Your code should have a variable cry
+- Your code should include a named function expression stored in the variable cry
+- Your code should call the function expression
+- Your function expression should return the expected output
+*/
+```
+
+# Quiz: inline(5-6): Call emotions() function so that it prints the output 
+  "I am happy, haha!"
+  Pass an inline function expression instead.
+
+```javascript
+var laugh = function(numOfHa) {
+  var strOfHa = "";
+  for (var i = 0; i < numOfHa; i++) {
+    strOfHa += "ha";
+  }
+  return strOfHa + "!";
+};
+
+// function declaration that takes in 2 arguments: a function for displaying
+//  a message, along with a name of a movie.
+function movies(messageFunction, name) {
+  messageFunction(name);
+}
+// call the movies function, pass in the function and name of movie
+movies(function displayFavorite(movieName) {
+  console.log("My favorite movie is  " + movieName);
+}, "Finding Nemo");
+
+
+
+emotions("happy", laugh(2));
+
+emotions("happy", function(numOfHa) {
+  var strOfHa = "";
+  for (var i = 0; i < numOfHa; i++) {
+    strOfHa += "ha";
+  }
+  return strOfHa + "!";
+};);// pass inline function expression
+
+function emotions(myString, myFunc){ // myFunc is inline function (numOfHa)
+  console.log("I am " + myString + ", " + myFunc(2));
+}
+
+emotions("happy", laugh(2));
+emotions("happy", function(numOfHa) {
+  var strOfHa = "";
+  for (var i = 0; i < numOfHa; i++) {
+    strOfHa += "ha";
+  }
+  return strOfHa + "!";
+};);
+function emotions(myString, myFunc){ // myFunc is inline function (numOfHa)
+  console.log("I am " + myString + ", " + myFunc(2));
+}
+
+
+
+ // we are passing laugh() function as an argument, pass an inline function expression instead.
+ // https://youtu.be/gESwplf0q4s
+```
+# Lesson: Array - enables us to store one or many data structures, properties and methods makes them more powerful.  Properties - special pieces of information about data structure.
+Element in array: individual data in array
+Index: references the location, or position, of an element in an array.
+
+- ex) 11th element in array: donut[11]
+
+```javascript
+var donuts = ["glazed", "powdered", "sprinkled"];
+console.log(donuts[0]); // first element in 'donuts' array: "glazed"
+
+// when trying to access non-existent element, undefined gets returned back
+donuts[3]; // undefined
+
+// you can change second element by setting it to new value
+donuts[1] = "glazed cruller"; // powdered > cruller changed done
+donuts = ["glazed", "powdered", "sprinkled"];
+```
+# Quiz: UdaciFamily (6-1): cReate an array udaciFamily, add Julia, James, heggy print console.log
+```javascript
+var udaciFamily = [ "Julia", "James", "Heggy" ];
+console.log(udaciFamily);
+
+/*
+Your code should have a variable udaciFamily
+- The variable udaciFamily should be an array
+- The variable udaciFamily should be an array containing the values "Julia", "James", and one other name
+- Your code should print udaciFamily to the console
+*/
+
+
+/*
+ * Programming Quiz: Building the Crew (6-2)
+ */
+
+var captain = "Mal";
+var second = "Zoe";
+var pilot = "Wash";
+var companion = "Inara";
+var mercenary = "Jayne";
+var mechanic = "Kaylee";
+
+// your code goes here
+
+var crew= [captain, second, pilot, companion, mercenary, mechanic];
+
+console.log(crew);
+/*
+ * Programming Quiz: The Price is Right (6-3)
+ */
+
+var prices = [1.23, 48.11, 90.11, 8.50, 9.99, 1.00, 1.10, 67.00];
+
+// your code goes here
+prices[0] = 5.00;
+prices[2] = 7.00;
+prices[6] = 9.00;
+
+console.log(prices); // [ 5, 48.11, 7, 8.5, 9.99, 1, 9, 67 ]
+```
+# Array Properties and Methods
+- string and array use .length property
+```javascript
+var word = "jacuzzis";
+console.log(word.length); // string length property
+
+var myArray = [1,2,3];
+myArray.length;
+```
+- Popular Methods: predefined functions that does cetain actions
+1) Reverse: reverses the order of the elements in an array
+2) Sort: sorts the elements in an array
+3) Push & Pop: two methods that allow us to add and remove elements from an array
+
+* resource: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+- To Modify an array we use built-in method for adding and removing elements from an array.  ex) push() and pop()
+
+* push() add elements to the end of an array
+```javascript
+  var donuts = ["glazed", "chocolate frosted", "Boston creme", "glazed cruller", "cinnamon sugar", "sprinkled"];
+
+  donuts.push("powdered"); // pushes "powdered" onto the end of the 'donuts' array
+  // output: ["glazed", "chocolate frosted", "Boston creme", "glazed cruller", "cinnamon sugar", "sprinkled", "powdered"]
+```
+* pop() remove elements from end of array
+```javascript
+var donuts = ["glazed", "chocolate frosted", "Boston creme", "glazed cruller", "cinnamon sugar", "sprinkled", "powdered"];
+
+donuts.pop(); // pops "powdered" off the end of 'donuts' array
+donuts.pop(); // pops "sprinkled" off the end of 'donuts' array
+donuts.pop(); // pops "cinnamon sugar" off the end of 'donuts' array
+
+// output "cinnamon sugar"
+// donuts array: ["glazed", "chocolate frosted", "Boston creme", "glazed cruller"]
+
+var donuts = ["glazed", "strawberry frosted", "powdered", "Boston creme"];
+
+donuts.pop();
+donuts.pop();
+donuts.pop();
+donuts.push("maple walnut");
+donuts.pop();
+donuts.push("sprinkled");
+
+// oputput: ["glazed", "sprinkled"]
+```
+# Quiz: Colors of the Rainbow (6-4)https://classroom.udacity.com/courses/ud803/lessons/378e7ff7-f7e5-4487-b5c4-fdf9b5c351d9/concepts/fac8e631-f0e4-46d5-8b24-1b5df5f2bffc
+
+- splice() add/remove element in array by specify which index location and add new elements from there, as well as the number of elements delete
+* MDN documentation: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
+
+syntax: 
+array.splice(start[, deleteCount[, item1[, item2[, ...]]]])
+
+return value: an array containing the deleted elements.  If only one element is removed, an array of one element is returned.  If none is removed, an empty array is returned.
+
+```javascript
+var donuts = ["glazed", "chocolate frosted", "Boston creme", "glazed cruller"];
+donuts.splice(1, 1, "chocolate cruller", "creme de leche"); // remove index 1 element ("chocolate frosted"), delete count 1, add "chocolate cruller" and "creme de leche" starting at index 1
+
+var myFish = ['angel', 'clown', 'mandarin', 'sturgeon'];
+var removed = myFish.splice(2, 0, 'drum'); // add drum at the beginnign of index 2
+// myFish is ["angel", "clown", "drum", "mandarin", "sturgeon"] 
+// removed is [], no elements removed
+
+var donuts = ["cookies", "cinnamon sugar", "creme de leche"];
+
+donuts.splice(-2, 0, "chocolate frosted", "glazed"); // start at position -2 (beginning of "cinnamon sugar", deletes 0, adds 2 elements "chocolate frosted", "glazed")
+// returns [] since non element removed
+donuts;
+// ouptput:  ["cookies", "chocolate frosted", "glazed", "cinnamon sugar", "creme de leche"];
+```
+NotE: to add and remove elements from an array at the same time, splice() is a great option!
+
+```javascript
+//original
+var rainbow = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"];
+//Change to following
+// var rainbow = ["Red", "Orange",      "Blackberry", "Blue"];
+
+// James "Yellow", "Green" gone 
+rainbow.splice( 2, 2, "Blackberry" )// begin at position 2, delete 2 things (yello and green), add 
+rainbow.pop(); // pops off last element
+
+/*Quiz: Colors of the Rainbow (6-4)
+Using only the splice() method, insert the missing colors into the array, and remove the color "Blackberry" by following these steps:
+
+Remove "Blackberry"
+Add "Yellow" and "Green"
+Add "Purple"
+*/
+var rainbow = ["Red", "Orange", "Blackberry", "Blue"];
+rainbow.splice( 2, 1, "Yellow", "Green");
+console.log(rainbow);
+// ["Red", "Orange", "Yellow", "Green", "Blue"]
+rainbow.splice( 5, 0, "Purple");  // use new last starting point which is 5
+// or
+rainbow.splice( rainbow.length, 0, "Purple");
+console.log(rainbow);
+
+/*
+ * Programming Quiz: Quidditch Cup (6-5)
+Create a function called hasEnoughPlayers() that takes the team array as an argument and returns true or false depending on if the array has at least seven players.
+ */
+var team = ["Oliver Wood", "Angelina Johnson", "Katie Bell", "Alicia Spinnet", "Fred Weasley"];
+
+function hasEnoughPlayers(team) {
+	var noOfPlayer = team.length;
+	if(noOfPlayer >= 7) {
+		return true;
+	} else {
+		return false;
+	}
+}
+```
+- push() refresher:
+```javascript
+var numbers = [1, 2, 3];
+numbers.push(4,5,6); // output: 6
+console.log(numbers); // [1, 2, 3, 4, 5, 6]
+// return value > the new length property of object upon which the method was called
+/*
+ * Programming Quiz: Joining the Crew (6-6)
+ */
+
+var captain = "Mal";
+var second = "Zoe";
+var pilot = "Wash";
+var companion = "Inara";
+var mercenary = "Jayne";
+var mechanic = "Kaylee";
+
+var crew = [captain, second, pilot, companion, mercenary, mechanic];
+
+var doctor = "Simon";
+var sister = "River";
+var shepherd = "Book";
+
+// your code goes here
+crew.push(doctor, sister, shepherd);
+```
+
+- resource MDN array method: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+```javascript
+// reversing elements in array
+var reverseMe = ["h", "e", "l", "l", "o"];
+reverseMe.reverse();
+console.log(reverseMe); // ["o", "l", "l", "e", "h"]
+
+// best array method to sort the elements in this array:
+var sortMe = [2, 1, 10, 7, 6];
+sortMe.sort(); 
+// output: [1, 10, 2, 6, 7]
+// Did you notice that 10 appears before 2? Traditionally, the number 2 comes before 10. But in the .sort() method, numbers are converted to Unicode strings, so 10 comes before 2 in Unicode order.
+```
+
+- pop() removes last element from an array and returns that element.
+  var plants = ['broccoli', 'cauliflower', 'cabbage', 'kale', 'tomato'];
+  plants.pop() // expected output: "tomato"
+- push() adds one or more elements to the end of an array and returns the new length of the array.
+  var numbers = [1, 2, 3];
+  numbers.push(4); // output: 4; numbers now have [1, 2, 3, 4]
+- shift() method removes the first element from an array and returns that removed element.
+  var removeFirstElement = ["a", "b", "c"];
+  removeFirstElement.shift(); // first element gone
+- unshift() adds one or more elements to the beginning of an array and returns the new length of the array.
+  var a = [1, 2, 3];
+  a.unshift(4, 5); // adds 4,5 at the end of the array
+- splice() chnages the content of an array by removing existing elements and/or adding new elements.  Returns the extracted elements
+  var myFish = ['angel', 'clown', 'mandarin', 'sturgeon'];
+  myFish.splice(2, 0, 'kinkong'); // start at index 2, remove 0, insert 'kingkong' at index 2 (infront of 'mandarin')
+  myFish; // myFish is ["angel", "clown", "drum", "mandarin", "sturgeon"]
+  myFish.splice(2, 1); // start at 2, remove 1 element ('drum')
+  myFish; // myFish is ["angel", "clown", "mandarin", "sturgeon"]
+- slice() copy of portion of an array into a new array begin to end (end not included!!).  The original will not be modified.  Returns extracted elements.
+  var animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
+  animals.slice(2); // expected output: Array ["camel", "duck", "elephant"]
+  var animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
+  animals.slice(2, -1); // slices 3rd element (camel) through second-to-last element (duck)
+
+- Quiz What method(s) could you use to remove the first element from this array:
+
+var removeFirstElement = ["a", "b", "c"];
+
+What method(s) could you use to remove the first element from this array: shift, splice, slice
+  var removeFirstElement = ["a", "b", "c"];
+    1) shift() will remove the first element from an array.
+      var removeFirstElement = ["a", "b", "c"];
+      removeFirstElement.shift();
+    2) splice() can be used if you specify the index of the first element, and indicate that you want to delete 1 element.
+      removeFirstElement.splice(0,1)
+      removeFirstElement
+    3) slice() allows you to create a copy of the array between two indices. You just exclude the index of the first element!
+      var removeFirstElement = ["a", "b", "c"];
+      removeFirstElement = removeFirstElement.slice(1) 
+
+Take Away: 
+shift() will remove the first element from an array.
+splice() can be used if you specify the index of the first element, and indicate that you want to delete 1 element.
+slice() allows you to create a copy of the array between two indices. You just exclude the index of the first element!
+
+- lesson on join(): changing this array into a string, return value: string
+```javascript
+var elements = ['Fire', 'Wind', 'Rain'];
+
+console.log(elements.join()); // joins elements seperated by comma
+// expected output: Fire,Wind,Rain
+
+console.log(elements.join('')); // joins with no comma
+// expected output: FireWindRain
+
+console.log(elements.join('-')); // joins array with 
+// expected output: Fire-Wind-Rain
+
+var turnMeIntoAString = ["U", "d", "a", "c", "i", "t", "y"];
+turnMeIntoAString.join(""); // "Udacity"
+```
+
+# array loops: access and manipulate each element in the array 
+```javascript
+// repeating code
+var donuts = ["jelly donut", "chocolate donut", "glazed donut"];
+donuts[0] += " hole";
+donuts[1] += " hole";
+donuts[2] += " hole";
+
+donuts array: ["jelly donut hole", "chocolate donut hole", "glazed donut hole"]
+
+// refactor using loops
+var donuts = ["jelly donut", "chocolate donut", "glazed donut"];
+
+for (var i = 0; i < donuts.length; i++) {
+  donuts[i] += ' hole';
+  // make it uppercase
+  donuts[i] = donuts[i].toUpperCase();
+}
+
+// output: donuts array: ["JELLY DONUT HOLE", "CHOCOLATE DONUT HOLE", "GLAZED DONUT HOLE"]
+```
+- Note: In this example, the variable i is being used to represent the index of the array. As i is incremented, you are stepping over each element in the array starting from 0 until donuts.length - 1 (donuts.length is out of bounds).
+
+# forEach() loop: resource: https://youtu.be/BsEdgtnaTzk 
+
+```javascript
+function myAwesomeFunction(element, index, array) {
+  console.log("Element: " + element);
+  console.log("Index: " + index);
+  console.log("Array: " + array);
+}
+
+myArray.forEach(myAwesomeFunction);
+
+var donuts = ["jelly donut", "chocolate donut", "glazed donut"];
+
+function printDonuts(donut) {
+  donut += " hole";
+  donut = donut.toUpperCase();
+  console.log(donut);
+};
+
+donuts.forEach(printDonuts);
+
+// since printDonuts will not be used only once; Use inline function expression
+donuts.forEach(function(donut) {
+  donut += " hole";
+  donut = donut.toUpperCase();
+  console.log(donut);
+});
+
+// output: JELLY DONUT HOLE, CHOCOLATE DONUT HOLE, GLAZED DONUT HOLE
+```
+  - Note: `forEach()` method iterates over the array without the need of an explicitly defined index. In the example above, donut corresponds to the element in the array itself. This is different from a `for` or `while` loop where an index is used to access each element in the array:
+  - Each time, it will call the function with different arguments (element, index, array). The `element` parameter will get the value of the array element. The `index` parameter will get the index of the element (starting with zero). The `array` parameter will get a reference to the whole array, which is handy if you want to modify the elements.
+```javascript
+words = ["cat", "in", "hat"];
+words.forEach(function(word, num, all) {
+  console.log("Word " + num + " in " + all.toString() + " is " + word);
+});
+
+// output: 
+// Word 0 in cat,in,hat is cat
+// Word 1 in cat,in,hat is in
+// Word 2 in cat,in,hat is hat
